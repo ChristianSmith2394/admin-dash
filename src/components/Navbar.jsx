@@ -28,8 +28,7 @@ const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
 );
 
 const Navbar = () => {
-  
-  const { currentColor, activeMenu, setActiveMenu, handleClick, isClicked, screenSize, setScreenSize } = useStateContext();
+  const { currentColor, activeMenu, setActiveMenu, handleClick, isClicked, setScreenSize, screenSize } = useStateContext();
 
   useEffect(() => {
     const handleResize = () => setScreenSize(window.innerWidth);
@@ -39,7 +38,7 @@ const Navbar = () => {
     handleResize();
 
     return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  }, [setScreenSize]);
 
   useEffect(() => {
     if (screenSize <= 900) {
@@ -47,7 +46,7 @@ const Navbar = () => {
     } else {
       setActiveMenu(true);
     }
-  }, [screenSize]);
+  }, [screenSize, setActiveMenu]);
 
   const handleActiveMenu = () => setActiveMenu(!activeMenu);
 
@@ -72,7 +71,7 @@ const Navbar = () => {
             <p>
               <span className="text-gray-400 text-14">Hi,</span>{' '}
               <span className="text-gray-400 font-bold ml-1 text-14">
-                Christian
+                Michael
               </span>
             </p>
             <MdKeyboardArrowDown className="text-gray-400 text-14" />
@@ -88,4 +87,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar
+export default Navbar;
